@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 
@@ -20,21 +19,25 @@ const ToDo = () => {
 
   return (
     <div className="todo-container">
-      <h2>To-Do List</h2>
-      <div className="input-container">
+      <h2 className="fade-in">To-Do List</h2>
+      <div className="input-container fade-in">
         <input
           type="text"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Add a new task"
         />
-        <button onClick={handleAddTask}>Add Task</button>
+        <button onClick={handleAddTask} className="slide-in-right">
+          Add Task
+        </button>
       </div>
-      <ul>
+      <ul className="fade-in">
         {tasks.map((task, index) => (
-          <li key={index} className="task">
+          <li key={index} className="task slide-in-left">
             {task}
-            <button onClick={() => handleDeleteTask(index)}>Delete</button>
+            <button onClick={() => handleDeleteTask(index)} className="slide-in-right">
+              Delete
+            </button>
           </li>
         ))}
       </ul>
