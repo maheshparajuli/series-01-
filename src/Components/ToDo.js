@@ -6,20 +6,20 @@ const ToDo = () => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [taskDates, setTaskDates] = useState({
-    startDate: "",
-    endDate: "",
+    startDateTime: "",
+    endDateTime: "",
   });
 
   const handleAddTask = () => {
     if (newTask.trim()) {
       const newTaskItem = {
         text: newTask.trim(),
-        startDate: taskDates.startDate,
-        endDate: taskDates.endDate,
+        startDateTime: taskDates.startDateTime,
+        endDateTime: taskDates.endDateTime,
       };
       setTasks([...tasks, newTaskItem]);
       setNewTask("");
-      setTaskDates({ startDate: "", endDate: "" });
+      setTaskDates({ startDateTime: "", endDateTime: "" });
       setShowForm(false);
     }
   };
@@ -46,10 +46,13 @@ const ToDo = () => {
     }
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
+  const formatDateTime = (dateTimeString) => {
+    if (!dateTimeString) return "";
+    const date = new Date(dateTimeString);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    })}`;
   };
 
   return (
@@ -77,22 +80,22 @@ const ToDo = () => {
           <div className="date-form animate-slide-down">
             <div className="date-inputs">
               <div className="date-field">
-                <label>Start Date:</label>
+                <label>Start Date and Time:</label>
                 <input
-                  type="date"
-                  value={taskDates.startDate}
+                  type="datetime-local"
+                  value={taskDates.startDateTime}
                   onChange={(e) =>
-                    setTaskDates({ ...taskDates, startDate: e.target.value })
+                    setTaskDates({ ...taskDates, startDateTime: e.target.value })
                   }
                 />
               </div>
               <div className="date-field">
-                <label>End Date:</label>
+                <label>End Date and Time:</label>
                 <input
-                  type="date"
-                  value={taskDates.endDate}
+                  type="datetime-local"
+                  value={taskDates.endDateTime}
                   onChange={(e) =>
-                    setTaskDates({ ...taskDates, endDate: e.target.value })
+                    setTaskDates({ ...taskDates, endDateTime: e.target.value })
                   }
                 />
               </div>
@@ -131,8 +134,8 @@ const ToDo = () => {
               <div className="task-details">
                 <span className="task-text">{task.text}</span>
                 <div className="task-dates">
-                  <span className="date-label">Start: {formatDate(task.startDate)}</span>
-                  <span className="date-label">Due: {formatDate(task.endDate)}</span>
+                  <span className="date-label">Start: {formatDateTime(task.startDateTime)}</span>
+                  <span className="date-label">Due: {formatDateTime(task.endDateTime)}</span>
                 </div>
               </div>
             </div>

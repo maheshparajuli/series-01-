@@ -1,17 +1,19 @@
-/* Previous styles remain the same */
+/* Container Styles */
 .todo-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  color: #2c3e50;
   text-align: center;
+  color: #2c3e50;
   margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 /* Input Section Styles */
@@ -25,27 +27,40 @@
   margin-bottom: 1rem;
 }
 
-input {
+.input-container input {
   flex: 1;
-  padding: 0.8rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 5px;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
 }
 
-input:focus {
+.input-container input:focus {
   outline: none;
   border-color: #3498db;
 }
 
+.add-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #2980b9;
+}
+
 /* Date Form Styles */
 .date-form {
-  background-color: #f8f9fa;
+  background-color: #f8fafc;
   padding: 1.5rem;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-top: 1rem;
-  border: 1px solid #e0e0e0;
 }
 
 .date-inputs {
@@ -62,16 +77,22 @@ input:focus {
 }
 
 .date-field label {
-  font-size: 0.9rem;
-  color: #2c3e50;
+  font-size: 0.875rem;
+  color: #64748b;
   font-weight: 500;
 }
 
-.date-field input[type="date"] {
-  padding: 0.6rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  font-size: 0.9rem;
+.date-field input {
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.date-field input:focus {
+  outline: none;
+  border-color: #3498db;
 }
 
 .form-buttons {
@@ -81,12 +102,12 @@ input:focus {
 }
 
 .confirm-button, .cancel-button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .confirm-button {
@@ -99,31 +120,48 @@ input:focus {
 }
 
 .cancel-button {
-  background-color: #95a5a6;
+  background-color: #e74c3c;
   color: white;
 }
 
 .cancel-button:hover {
-  background-color: #7f8c8d;
+  background-color: #c0392b;
 }
 
 /* Task List Styles */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .task-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .task-content {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 1rem;
   flex: 1;
+}
+
+.task-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
 }
 
 .task-details {
@@ -140,113 +178,99 @@ input:focus {
 .task-dates {
   display: flex;
   gap: 1rem;
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: #64748b;
 }
 
 .date-label {
-  background-color: #e8f4fd;
-  padding: 0.2rem 0.5rem;
-  border-radius: 3px;
-  font-size: 0.75rem;
-}
-
-/* Checkbox Styles */
-.task-checkbox {
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  cursor: pointer;
-  accent-color: #3498db;
-}
-
-/* Button Styles */
-.add-button, .delete-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-  white-space: nowrap;
-}
-
-.add-button {
-  background-color: #3498db;
-  color: white;
-}
-
-.add-button:hover {
-  background-color: #2980b9;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .delete-button {
+  padding: 0.5rem 1rem;
   background-color: #e74c3c;
   color: white;
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
   background-color: #c0392b;
 }
 
-/* Completed Task Styles */
-.task-item.completed .task-text {
+.completed .task-text {
   text-decoration: line-through;
-  color: #a0aec0;
-}
-
-.task-item.completed {
-  background-color: #f7fafc;
-  opacity: 0.8;
-}
-
-/* Animation Keyframes (remain the same) */
-@keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes bounceIn {
-  0% { transform: translateY(-50px); opacity: 0; }
-  60% { transform: translateY(10px); }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(3px); }
-  75% { transform: translateX(-3px); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  color: #94a3b8;
 }
 
 /* Animation Classes */
-.animate-scale-in {
-  animation: scaleIn 0.5s ease forwards;
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.animate-bounce-in {
-  animation: bounceIn 1s ease forwards;
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease forwards;
 }
 
 .animate-slide-down {
@@ -255,17 +279,86 @@ input:focus {
 
 .animate-slide-in {
   animation: slideIn 0.5s ease forwards;
-  opacity: 0;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
 }
 
 .animate-shake-hover:hover {
-  animation: shake 0.5s ease infinite;
+  animation: shake 0.3s ease-in-out;
 }
 
-.animate-pulse {
-  animation: pulse 2s infinite;
+/* Responsive Styles */
+@media (max-width: 640px) {
+  .todo-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .date-inputs {
+    flex-direction: column;
+  }
+
+  .task-dates {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .todo-container {
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .title {
+    color: #e2e8f0;
+  }
+
+  .task-item {
+    background-color: #2d2d2d;
+  }
+
+  .task-text {
+    color: #e2e8f0;
+  }
+
+  .date-form {
+    background-color: #2d2d2d;
+  }
+
+  .input-container input,
+  .date-field input {
+    background-color: #333;
+    border-color: #404040;
+    color: #e2e8f0;
+  }
+
+  .task-dates {
+    color: #94a3b8;
+  }
+
+  .completed .task-text {
+    color: #64748b;
+  }
 }
