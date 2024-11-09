@@ -14,7 +14,6 @@
   margin-bottom: 2rem;
 }
 
-/* Input Styles */
 .input-container {
   display: flex;
   gap: 1rem;
@@ -33,6 +32,93 @@ input {
 input:focus {
   outline: none;
   border-color: #3498db;
+}
+
+/* Task Item Styles */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* Checkbox Container Styles */
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.checkbox-container:hover .checkmark {
+  background-color: #edf2f7;
+}
+
+.task-checkbox:checked ~ .checkmark {
+  background-color: #3498db;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.task-checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Completed Task Styles */
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #a0aec0;
+}
+
+.task-item.completed {
+  background-color: #f7fafc;
+  opacity: 0.8;
 }
 
 /* Button Styles */
@@ -63,34 +149,7 @@ input:focus {
   background-color: #c0392b;
 }
 
-/* Task List Styles */
-.task-list {
-  list-style: none;
-  padding: 0;
-}
-
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.task-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.task-text {
-  flex: 1;
-  margin-right: 1rem;
-}
-
-/* Animations */
+/* Animation keyframes remain the same */
 @keyframes scaleIn {
   from {
     transform: scale(0.9);

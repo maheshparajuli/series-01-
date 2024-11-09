@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const ToDo = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   const handleAddTask = () => {
     if (newTask.trim()) {
@@ -13,12 +14,22 @@ const ToDo = () => {
 
   const handleDeleteTask = (index) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
+    const updatedCompletedTasks = completedTasks.filter((i) => i !== index);
     setTasks(updatedTasks);
+    setCompletedTasks(updatedCompletedTasks);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleAddTask();
+    }
+  };
+
+  const toggleTaskCompletion = (index) => {
+    if (completedTasks.includes(index)) {
+      setCompletedTasks(completedTasks.filter((i) => i !== index));
+    } else {
+      setCompletedTasks([...completedTasks, index]);
     }
   };
 
@@ -45,10 +56,21 @@ const ToDo = () => {
         {tasks.map((task, index) => (
           <li 
             key={index} 
-            className="task-item animate-slide-in"
+            className={`task-item animate-slide-in ${completedTasks.includes(index) ? 'completed' : ''}`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <span className="task-text">{task}</span>
+            <div className="task-content">
+              <label className="checkbox-container">
+                <input
+                  type="checkbox"
+                  checked={completedTasks.includes(index)}
+                  onChange={() => toggleTaskCompletion(index)}
+                  className="task-checkbox"
+                />
+                <span className="checkmark"></span>
+              </label>
+              <span className="task-text">{task}</span>
+            </div>
             <button 
               onClick={() => handleDeleteTask(index)} 
               className="delete-button animate-shake-hover"
