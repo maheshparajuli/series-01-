@@ -362,3 +362,28 @@
     color: #64748b;
   }
 }
+/* Add these styles to your existing CSS file */
+
+.date-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  display: block;
+  font-style: italic;
+}
+
+.date-field input::placeholder {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* Dark mode support for hints */
+@media (prefers-color-scheme: dark) {
+  .date-hint {
+    color: #9ca3af;
+  }
+  
+  .date-field input::placeholder {
+    color: #6b7280;
+  }
+}

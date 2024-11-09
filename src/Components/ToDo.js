@@ -49,10 +49,14 @@ const ToDo = () => {
   const formatDateTime = (dateTimeString) => {
     if (!dateTimeString) return "";
     const date = new Date(dateTimeString);
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {
+    const month = date.toLocaleString('default', { month: 'short' });
+    const day = date.getDate();
+    const time = date.toLocaleTimeString([], {
       hour: '2-digit',
-      minute: '2-digit'
-    })}`;
+      minute: '2-digit',
+      hour12: true
+    });
+    return `${month} ${day}, ${time}`;
   };
 
   return (
@@ -87,7 +91,9 @@ const ToDo = () => {
                   onChange={(e) =>
                     setTaskDates({ ...taskDates, startDateTime: e.target.value })
                   }
+                  placeholder="Select start date and time"
                 />
+                <span className="date-hint">Format: Month Day, HH:MM AM/PM</span>
               </div>
               <div className="date-field">
                 <label>End Date and Time:</label>
@@ -97,7 +103,9 @@ const ToDo = () => {
                   onChange={(e) =>
                     setTaskDates({ ...taskDates, endDateTime: e.target.value })
                   }
+                  placeholder="Select end date and time"
                 />
+                <span className="date-hint">Format: Month Day, HH:MM AM/PM</span>
               </div>
             </div>
             <div className="form-buttons">
