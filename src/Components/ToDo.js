@@ -60,15 +60,12 @@ const ToDo = () => {
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div className="task-content">
-              <label className="checkbox-container">
-                <input
-                  type="checkbox"
-                  checked={completedTasks.includes(index)}
-                  onChange={() => toggleTaskCompletion(index)}
-                  className="task-checkbox"
-                />
-                <span className="checkmark"></span>
-              </label>
+              <input
+                type="checkbox"
+                checked={completedTasks.includes(index)}
+                onChange={() => toggleTaskCompletion(index)}
+                className="task-checkbox"
+              />
               <span className="task-text">{task}</span>
             </div>
             <button 
