@@ -1,167 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-
-:root {
-  --footer-bg: linear-gradient(90deg, #2c3e50, #3498db);
-  --footer-text: #ecf0f1;
-  --decoration-color: #e74c3c;
-  --glow-color: rgba(52, 152, 219, 0.6);
+body {
+  @apply bg-gray-100 flex items-center justify-center min-h-screen;
 }
 
-.footer {
-  background: var(--footer-bg);
-  color: var(--footer-text);
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-  position: relative;
-  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  animation: footerSlideUp 0.72s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+.todo-container {
+  @apply bg-white shadow-lg rounded-lg p-6 w-full max-w-md;
 }
 
-@keyframes footerSlideUp {
-  0% { opacity: 0; transform: translateY(100%); }
-  100% { opacity: 1; transform: translateY(0); }
+.filter-buttons button {
+  @apply px-3 py-1 rounded text-sm transition-colors duration-200;
 }
 
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--footer-text), transparent);
-  animation: shimmerLine 1.8s infinite linear;
+.priority-selector button {
+  @apply px-3 py-1 rounded text-sm font-medium transition-colors duration-200;
 }
 
-@keyframes shimmerLine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+.task-list li {
+  @apply flex items-center space-x-2 p-2 rounded-md transition-all duration-300;
 }
 
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.task-list .completed {
+  @apply opacity-70 bg-green-50;
 }
 
-.footer-decoration {
-  height: 4px;
-  width: 100px;
-  background: var(--decoration-color);
-  margin: 10px auto;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-  animation: decorationExpand 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+/* Additional subtle animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes decorationExpand {
-  0% { width: 0; opacity: 0; }
-  100% { width: 100px; opacity: 1; }
-}
-
-.footer-decoration::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: decorationShine 1.2s infinite;
-}
-
-@keyframes decorationShine {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-.footer:hover {
-  box-shadow: 0 -5px 30px var(--glow-color);
-  transition: box-shadow 0.3s ease;
-}
-
-.footer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-  animation: particlesMove 6s infinite linear;
-}
-
-@keyframes particlesMove {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-100%) rotate(360deg); }
-}
-
-.footer a {
-  color: var(--footer-text);
-  text-decoration: none;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.footer a::before {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--footer-text);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-
-.footer a:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .footer,
-  .footer-decoration,
-  .footer::before,
-  .footer::after,
-  .footer-content {
-    animation: none;
-    transition: none;
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
   }
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
 }
 
-.footer-wave {
-  position: absolute;
-  top: -10px;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255, 255, 255, 0.1) 10px,
-    rgba(255, 255, 255, 0.1) 20px
-  );
-  animation: waveMove 12s linear infinite;
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
 }
 
-@keyframes waveMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 0; }
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .todo-container {
+    @apply w-full m-4;
+  }
+
+  .date-inputs {
+    @apply grid-cols-1;
+  }
+}
+
+/* Focus and hover states */
+input:focus, 
+button:focus {
+  @apply outline-none ring-2 ring-blue-300;
+}
+
+button:hover {
+  @apply opacity-80;
 }
