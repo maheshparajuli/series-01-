@@ -14,7 +14,7 @@ const ToDo = () => {
   const [priorityOptions] = useState(["Low", "Medium", "High"]);
   const [selectedPriority, setSelectedPriority] = useState("Medium");
 
-  // Local storage integration
+
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
     const savedCompletedTasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
