@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Trash2, Edit2, CheckCircle, XCircle } from 'lucide-react';
 
 const ToDo = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,9 +10,9 @@ const ToDo = () => {
     startDateTime: "",
     endDateTime: "",
   });
-  const [filter, setFilter] = useState("all"); // New filter state
-  const [priorityOptions] = useState(["Low", "Medium", "High"]); // Priority options
-  const [selectedPriority, setSelectedPriority] = useState("Medium"); // Default priority
+  const [filter, setFilter] = useState("all");
+  const [priorityOptions] = useState(["Low", "Medium", "High"]);
+  const [selectedPriority, setSelectedPriority] = useState("Medium");
 
   // Local storage integration
   useEffect(() => {
@@ -39,21 +38,19 @@ const ToDo = () => {
       };
 
       if (editingIndex !== null) {
-        // Update existing task
         const updatedTasks = [...tasks];
         updatedTasks[editingIndex] = newTaskItem;
         setTasks(updatedTasks);
         setEditingIndex(null);
       } else {
-        // Add new task
         setTasks([...tasks, newTaskItem]);
       }
 
-      // Reset form
       setNewTask("");
       setTaskDates({ startDateTime: "", endDateTime: "" });
       setShowForm(false);
       setSelectedPriority("Medium");
+    }
   };
 
   const handleEditTask = (index) => {
@@ -95,7 +92,6 @@ const ToDo = () => {
     });
   };
 
-  // Filter tasks based on selected filter
   const filteredTasks = tasks.filter((_, index) => {
     switch(filter) {
       case "completed": return completedTasks.includes(index);
@@ -104,7 +100,6 @@ const ToDo = () => {
     }
   });
 
-  // Sorting tasks by priority and creation date
   const sortedTasks = filteredTasks.sort((a, b) => {
     const priorityOrder = { "High": 3, "Medium": 2, "Low": 1 };
     if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
@@ -117,7 +112,6 @@ const ToDo = () => {
     <div className="todo-container max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">Enhanced Todo List</h2>
       
-      {/* Filter Buttons */}
       <div className="filter-buttons flex justify-center space-x-2 mb-4">
         {["all", "active", "completed"].map(filterType => (
           <button 
@@ -143,7 +137,6 @@ const ToDo = () => {
           className="w-full p-2 border rounded mb-2"
         />
         
-        {/* Priority Selector */}
         <div className="priority-selector flex space-x-2 mb-2">
           {priorityOptions.map(priority => (
             <button
@@ -160,7 +153,6 @@ const ToDo = () => {
           ))}
         </div>
 
-        {/* Date Selection Form */}
         <div className="date-inputs grid grid-cols-2 gap-2 mb-2">
           <div>
             <label className="block text-sm">Start Date:</label>
@@ -182,7 +174,6 @@ const ToDo = () => {
           </div>
         </div>
 
-        {/* Add/Update Task Button */}
         <button 
           onClick={handleAddTask}
           className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
@@ -191,7 +182,6 @@ const ToDo = () => {
         </button>
       </div>
 
-      {/* Task List */}
       <ul className="mt-4 space-y-2">
         {sortedTasks.map((task, index) => {
           const originalIndex = tasks.indexOf(task);
@@ -229,15 +219,15 @@ const ToDo = () => {
               <div className="flex space-x-2">
                 <button 
                   onClick={() => handleEditTask(originalIndex)}
-                  className="text-blue-500 hover:text-blue-700"
+                  className="text-blue-500 hover:text-blue-700 text-sm"
                 >
-                  <Edit2 size={18} />
+                  Edit
                 </button>
                 <button 
                   onClick={() => handleDeleteTask(originalIndex)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-500 hover:text-red-700 text-sm"
                 >
-                  <Trash2 size={18} />
+                  Delete
                 </button>
               </div>
             </li>
