@@ -109,19 +109,15 @@ const ToDo = () => {
   });
 
   return (
-    <div className="todo-container max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Enhanced Todo List</h2>
+    <div className="todo-container">
+      <h2 className="todo-title">Enhanced Todo List</h2>
       
-      <div className="filter-buttons flex justify-center space-x-2 mb-4">
+      <div className="filter-buttons">
         {["all", "active", "completed"].map(filterType => (
           <button 
             key={filterType}
             onClick={() => setFilter(filterType)}
-            className={`px-3 py-1 rounded ${
-              filter === filterType 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-gray-200 text-gray-700'
-            }`}
+            className={`filter-button ${filter === filterType ? 'active' : ''}`}
           >
             {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
           </button>
@@ -134,98 +130,86 @@ const ToDo = () => {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Add a new task"
-          className="w-full p-2 border rounded mb-2"
+          className="task-input"
         />
         
-        <div className="priority-selector flex space-x-2 mb-2">
+        <div className="priority-selector">
           {priorityOptions.map(priority => (
             <button
               key={priority}
               onClick={() => setSelectedPriority(priority)}
-              className={`px-3 py-1 rounded ${
-                selectedPriority === priority 
-                  ? 'bg-blue-500 text-white' 
-                  : 'bg-gray-200 text-gray-700'
-              }`}
+              className={`priority-button ${selectedPriority === priority ? 'selected' : ''}`}
             >
               {priority} Priority
             </button>
           ))}
         </div>
 
-        <div className="date-inputs grid grid-cols-2 gap-2 mb-2">
+        <div className="date-inputs">
           <div>
-            <label className="block text-sm">Start Date:</label>
+            <label className="date-label">Start Date:</label>
             <input
               type="datetime-local"
               value={taskDates.startDateTime}
               onChange={(e) => setTaskDates({...taskDates, startDateTime: e.target.value})}
-              className="w-full p-1 border rounded"
+              className="date-input"
             />
           </div>
           <div>
-            <label className="block text-sm">End Date:</label>
+            <label className="date-label">End Date:</label>
             <input
               type="datetime-local"
               value={taskDates.endDateTime}
               onChange={(e) => setTaskDates({...taskDates, endDateTime: e.target.value})}
-              className="w-full p-1 border rounded"
+              className="date-input"
             />
           </div>
         </div>
 
         <button 
           onClick={handleAddTask}
-          className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          className="add-task-button"
         >
           {editingIndex !== null ? 'Update Task' : 'Add Task'}
         </button>
       </div>
 
-      <ul className="mt-4 space-y-2">
+      <ul className="task-list">
         {sortedTasks.map((task, index) => {
           const originalIndex = tasks.indexOf(task);
           return (
             <li 
               key={originalIndex} 
-              className={`flex items-center p-2 rounded ${
-                completedTasks.includes(originalIndex) 
-                  ? 'bg-green-100' 
-                  : 'bg-gray-100'
-              }`}
+              className={`task-item ${completedTasks.includes(originalIndex) ? 'completed' : ''}`}
             >
               <input
                 type="checkbox"
                 checked={completedTasks.includes(originalIndex)}
                 onChange={() => toggleTaskCompletion(originalIndex)}
-                className="mr-2"
+                className="task-checkbox"
               />
-              <div className="flex-grow">
-                <div className={`${completedTasks.includes(originalIndex) ? 'line-through text-gray-500' : ''}`}>
+              <div className="task-details">
+                <div className={`task-text ${completedTasks.includes(originalIndex) ? 'completed-text' : ''}`}>
                   {task.text}
                 </div>
-                <div className="text-xs text-gray-500">
-                  <span className={`mr-2 ${
-                    task.priority === 'High' ? 'text-red-500' :
-                    task.priority === 'Medium' ? 'text-yellow-500' :
-                    'text-green-500'
-                  }`}>
+                <div className="task-metadata">
+                  <span className={`priority-tag ${task.priority.toLowerCase()}-priority`}>
                     {task.priority} Priority
                   </span>
                   {task.startDateTime && `Start: ${formatDateTime(task.startDateTime)}`}
                   {task.endDateTime && ` | Due: ${formatDateTime(task.endDateTime)}`}
                 </div>
               </div>
-              <div className="flex space-x-2">
+              <div className="task-actions">
                 <button 
                   onClick={() => handleEditTask(originalIndex)}
-                  className="text-blue-500 hover:text-blue-700 text-sm"
+                  className="edit-button"
                 >
                   Edit
                 </button>
                 <button 
                   onClick={() => handleDeleteTask(originalIndex)}
-                  className="text-red-500 hover:text-red-700 text-sm"
+                  className="delete-button"
                 >
                   Delete
                 </button>
